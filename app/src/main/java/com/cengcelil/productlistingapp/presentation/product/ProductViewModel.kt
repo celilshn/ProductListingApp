@@ -50,7 +50,7 @@ class ProductViewModel @Inject constructor(
         code?.let {
             productRepository.getProductDetail(it).body()?.let {
                 it.productItem?.let {
-                    println("PRODUCT : ${it.badge} ${it.mkName}")
+                    println("PRODUCT DETAIL : ${it.badge} ${it.mkName}")
 
                 }
             }

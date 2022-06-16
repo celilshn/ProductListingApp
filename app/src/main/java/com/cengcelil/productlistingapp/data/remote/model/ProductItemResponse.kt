@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductItemResponse(
 
-    @SerializedName("result") var productItem: ProductItem? = ProductItem()
+    @SerializedName("result") var productItem: ProductItem
 
 )

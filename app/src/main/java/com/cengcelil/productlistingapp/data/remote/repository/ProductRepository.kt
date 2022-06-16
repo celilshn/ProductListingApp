@@ -13,7 +13,8 @@ class ProductRepository @Inject constructor(
     }
 
     suspend fun getProducts(url: String) = apiHelper.getProducts(url)
-    suspend fun getProductDetail(code: String) = apiHelper.getProductDetail(
+
+    suspend fun getProductDetail(code: Int) = apiHelper.getProductDetail(
         StringBuilder().append(productDetailBaseUrl).append("{$code}").toString()
     )
 }

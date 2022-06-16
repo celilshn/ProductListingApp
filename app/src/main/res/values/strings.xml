@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ProductListingApp</string>
+    <string name="seller">Satıcı</string>
+    <string name="follow">takip</string>
 </resources>

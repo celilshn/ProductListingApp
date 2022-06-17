@@ -35,7 +35,6 @@ class ProductViewModel @Inject constructor(
 
     fun getProductListState() = lastProductListState
     fun getProductDetailState() = productDetailState
-    var isLoadingMore = false
     val listData = Pager(PagingConfig(pageSize = 1)) {
         ProductListPagingSource(productRepository)
     }.flow.cachedIn(viewModelScope)
@@ -61,8 +60,5 @@ class ProductViewModel @Inject constructor(
 
     }
 
-    /* fun setCode() {
-         lastCodeLiveData.postValue(lastProductListState.value?.products?.first()?.code?.toString())
-         viewModelScope.launch { }
-     }*/
+
 }

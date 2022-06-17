@@ -48,6 +48,7 @@
         android:id="@+id/txtProductName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintStart_toStartOf="@+id/txtProductName"
         app:layout_constraintTop_toBottomOf="@+id/txtProductName"
         tools:text="20.567,00TL" />
 
@@ -76,7 +77,7 @@
         android:textColor="@color/gray"
         android:textSize="12sp"
         app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"
-        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintStart_toStartOf="@+id/txtProductName"
         app:layout_constraintTop_toBottomOf="@+id/txtProductPrice"
         tools:text="131 Satıcı" />
 
@@ -88,7 +89,7 @@
         android:layout_marginTop="12dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintStart_toStartOf="@+id/txtProductName"
         app:layout_constraintTop_toBottomOf="@+id/txtSellerCount"
         tools:text="3.000+ takip" />
 </androidx.constraintlayout.widget.ConstraintLayout>

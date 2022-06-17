@@ -9,6 +9,7 @@ import com.cengcelil.productlistingapp.ProductListItem
 import com.cengcelil.productlistingapp.R
 import com.cengcelil.productlistingapp.common.Util.BLANK
 import com.cengcelil.productlistingapp.common.Util.format
+import com.cengcelil.productlistingapp.common.Util.numberFormat
 import com.cengcelil.productlistingapp.databinding.ItemProductListBinding
 import java.text.DecimalFormat
 
@@ -32,7 +33,7 @@ class VerticalProductListAdapter(val clickCallback: (code: Int) -> Unit) :
                             countOfPrices.let { "$it ${context.getString(R.string.seller)}" }
 
                         txtProductPrice.text =
-                            format.format(price) ?: BLANK
+                            numberFormat.format(price) ?: BLANK
                         com.bumptech.glide.Glide.with(itemView).load(imageUrl).into(imgProduct)
                         root.setOnClickListener { clickCallback.invoke(code) }
                     }

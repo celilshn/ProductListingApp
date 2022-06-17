@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cengcelil.productlistingapp.ProductListItem
 import com.cengcelil.productlistingapp.common.Util.BLANK
 import com.cengcelil.productlistingapp.common.Util.format
+import com.cengcelil.productlistingapp.common.Util.numberFormat
 import com.cengcelil.productlistingapp.databinding.ItemProductListHorizontalBinding
 
 class HorizontalProductListAdapter(val clickCallback: (code: Int) -> Unit) :
@@ -31,7 +32,7 @@ class HorizontalProductListAdapter(val clickCallback: (code: Int) -> Unit) :
                             ?: kotlin.run { BLANK }
 
                     txtProductPrice.text =
-                        format.format(price)
+                        numberFormat.format(price)
                             ?: BLANK
                     com.bumptech.glide.Glide.with(itemView).load(imageUrl).into(imgProduct)
                     root.setOnClickListener { clickCallback.invoke(code) }

@@ -13,6 +13,8 @@ import com.cengcelil.productlistingapp.common.Status
 import com.cengcelil.productlistingapp.databinding.ProductListFragmentBinding
 import com.cengcelil.productlistingapp.presentation.adapter.HorizontalProductListAdapter
 import com.cengcelil.productlistingapp.presentation.adapter.VerticalProductListAdapter
+import com.cengcelil.productlistingapp.presentation.view.custom.GridSpacingItemDecoration
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -36,7 +38,15 @@ class ProductListFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         b = ProductListFragmentBinding.inflate(LayoutInflater.from(requireContext())).apply {
-            rcyProductList.adapter = productListAdapter
+            with(rcyProductList) {
+                adapter = productListAdapter
+                addItemDecoration(GridSpacingItemDecoration(2,24,true))
+            }
+            with(pagerProductListItem) {
+                adapter = horizontalProductListAdapter
+                TabLayoutMediator(tablayout, pagerProductListItem)
+                { _, _ -> }.attach()
+            }
         }
         viewModel = ViewModelProvider(requireActivity())[ProductViewModel::
         class.java]

@@ -12,7 +12,7 @@ data class ProductItem(
     @SerializedName("imageUrl") var imageUrl: String,
     @SerializedName("storageOptions") var storageOptions: ArrayList<String> = arrayListOf(),
     @SerializedName("countOfPrices") var countOfPrices: Int,
-    @SerializedName("price") var price: String,
+    @SerializedName("price") var price: Double,
     @SerializedName("freeShipping") var freeShipping: Boolean,
     @SerializedName("lastUpdate") var lastUpdate: String
 

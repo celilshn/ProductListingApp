@@ -18,7 +18,8 @@
                 android:id="@+id/pagerProductListItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:nestedScrollingEnabled="false">
 
             </androidx.viewpager2.widget.ViewPager2>
 
@@ -39,6 +40,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcyProductList"
+            android:background="@color/gray_200"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"

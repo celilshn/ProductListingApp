@@ -2,4 +2,9 @@
     <string name="app_name">ProductListingApp</string>
     <string name="seller">Satıcı</string>
     <string name="follow">takip</string>
+    <string name="storage_options">Kapasite Seçenekleri</string>
+    <string name="lowest_price_text">satıcı içinde %1$s en ucuz fiyat seçeneği</string>
+    <string name="free_shipping">kargo dahil</string>
+    <string name="free_cargo">Ücretsiz Kargo</string>
+    <string name="last_updated">"Son Güncelleme : "</string>
 </resources>

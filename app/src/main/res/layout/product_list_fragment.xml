@@ -10,16 +10,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/pagerProductListItem"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pagerProductListItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+            </androidx.viewpager2.widget.ViewPager2>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|center"
+                app:tabBackground="@drawable/tab_pager_selector"
+                app:tabGravity="center"
+                app:tabRippleColor="@android:color/transparent"
+                app:tabIndicatorHeight="0dp"
+                app:tabSelectedTextColor="@android:color/transparent"
+                app:tabTextColor="@android:color/transparent" />
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcyProductList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:itemCount="4"

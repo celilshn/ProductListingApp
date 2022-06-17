@@ -4,10 +4,15 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cengcelil.productlistingapp.ProductListResponse
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.cengcelil.productlistingapp.ProductListResult
 import com.cengcelil.productlistingapp.common.Resource
+import com.cengcelil.productlistingapp.common.Util.startUrl
 import com.cengcelil.productlistingapp.data.remote.model.ProductItem
+import com.cengcelil.productlistingapp.data.remote.model.ProductListPagingSource
 import com.cengcelil.productlistingapp.data.remote.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -23,8 +28,6 @@ class ProductViewModel @Inject constructor(
     var productRepository: ProductRepository
 ) : ViewModel() {
 
-    private var nextUrlLiveData =
-        MutableLiveData<String?>("https://mocki.io/v1/59906f35-d5d5-40f7-8d44-53fd26eb3a05")
 
     private var productDetailState = MutableLiveData<Resource<ProductItem>>()
     private var lastProductListState =
@@ -32,6 +35,10 @@ class ProductViewModel @Inject constructor(
 
     fun getProductListState() = lastProductListState
     fun getProductDetailState() = productDetailState
+    var isLoadingMore = false
+    val listData = Pager(PagingConfig(pageSize = 1)) {
+        ProductListPagingSource(productRepository)
+    }.flow.cachedIn(viewModelScope)
 
     init {
         viewModelScope.launch {
@@ -39,31 +46,17 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    suspend fun getProductList() = CoroutineScope(IO).launch {
-        nextUrlLiveData.value?.let {
-            productRepository.getProducts(it).body()?.let {
-                it.productsResult?.let {
-                    it.products.forEach {
-                        println("Product ${it.name} ${it.followCount}")
-
-                    }
-
-                    lastProductListState.postValue(Resource.success(it))
-                }
-                /*   getProductDetail(it.productsResult?.products?.first()?.code?.toString())
-                   it.productsResult?.horizontalProducts?.forEach {
-                       println("PRODUCT : ${it.code} ${it.name}")
-                   }*/
+    private suspend fun getProductList() = CoroutineScope(IO).launch {
+        productRepository.getProducts(startUrl).body()?.let {
+            it.productsResult.let {
+                lastProductListState.postValue(Resource.success(it))
             }
-
         }
     }
 
     suspend fun getProductDetail(code: Int) = CoroutineScope(IO).launch {
         productRepository.getProductDetail(code).body()?.let {
             productDetailState.postValue(Resource.success(it.productItem))
-            println("PRODUCT DETAIL : ${it.productItem.badge} ${it.productItem.mkName}")
-
         }
 
     }

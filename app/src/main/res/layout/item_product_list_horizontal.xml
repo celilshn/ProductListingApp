@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".33" />
+
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1.25"
+        app:layout_constraintEnd_toStartOf="@+id/txtDropRatio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/purple_200" />
+
+    <TextView
+        android:id="@+id/txtDropRatio"
+        android:layout_width="36dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/shape_red_circle"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/guide33"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="% 322" />
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="iPhone 13 128 GB" />
+
+
+    <TextView
+        android:id="@+id/txtProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintTop_toBottomOf="@+id/txtProductName"
+        tools:text="20.567,00TL" />
+
+    <TextView
+        android:id="@+id/txtSellerCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
+        app:drawableEndCompat="@drawable/ic_baseline_arrow_forward_ios_16"
+        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintTop_toBottomOf="@+id/txtProductPrice"
+        tools:text="131 Satıcı" />
+
+
+    <TextView
+        android:id="@+id/txtFollowCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guide33"
+        app:layout_constraintTop_toBottomOf="@+id/txtSellerCount"
+        tools:text="3.000+ takip" />
+</androidx.constraintlayout.widget.ConstraintLayout>

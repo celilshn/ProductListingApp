@@ -7,35 +7,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cengcelil.productlistingapp.common.Status
 import com.cengcelil.productlistingapp.databinding.ProductListFragmentBinding
-import com.cengcelil.productlistingapp.presentation.adapter.ProductListAdapter
+import com.cengcelil.productlistingapp.presentation.adapter.HorizontalProductListAdapter
+import com.cengcelil.productlistingapp.presentation.adapter.VerticalProductListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
 
     private lateinit var viewModel: ProductViewModel
     private lateinit var b: ProductListFragmentBinding
-    private val productListAdapter = ProductListAdapter {
-        it?.let {
-            findNavController().navigate(
-                ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
-                    it
-                )
-            )
-        }
-    }
+    private val productListAdapter = VerticalProductListAdapter { itemCallback(it) }
+    private val horizontalProductListAdapter =
+        HorizontalProductListAdapter { itemCallback(it) }
+
+    private fun itemCallback(code: Int) = findNavController().navigate(
+        ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
+            code
+        )
+    )
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         b = ProductListFragmentBinding.inflate(LayoutInflater.from(requireContext())).apply {
-            with(rcyProductList) {
-                adapter = productListAdapter
-            }
+            rcyProductList.adapter = productListAdapter
         }
-        viewModel = ViewModelProvider(requireActivity())[ProductViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[ProductViewModel::
+        class.java]
     }
 
     override fun onCreateView(
@@ -46,7 +50,12 @@ class ProductListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        lifecycleScope.launch {
+            viewModel.listData.collect {
+                productListAdapter.submitData(it)
+            }
 
+        }
     }
 
     private fun setupObservers() {
@@ -56,13 +65,8 @@ class ProductListFragment : Fragment() {
                     Status.ERROR -> {}
                     Status.SUCCESS -> {
                         it?.let {
-                            productListAdapter.submitList(it.data!!.products.apply {
-                                forEach {
-                                    println("Product ${it.name} ${it.followCount}")
-                                }
-                            })
+                            horizontalProductListAdapter.submitList(it.data!!.horizontalProducts)
                         }
-
                     }
                 }
             }

@@ -39,6 +39,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.paging:paging-common-ktx:3.0.0'
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.0'
     def hilt_version = "2.39"
     def retrofit_version = "2.9.0"
 
@@ -67,4 +69,8 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+    //Viewpager 2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
 }

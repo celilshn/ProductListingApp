@@ -1,10 +1,8 @@
 package com.cengcelil.productlistingapp
 
-import com.google.gson.annotations.SerializedName
 
 
 data class ProductListItem(
-
     var code: Int,
     var imageUrl: String,
     var name: String,
@@ -12,5 +10,4 @@ data class ProductListItem(
     var price: Double,
     var countOfPrices: Int,
     var followCount: Int
-
 )

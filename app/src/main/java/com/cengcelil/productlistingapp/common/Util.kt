@@ -1,5 +1,7 @@
 package com.cengcelil.productlistingapp.common
 
+import android.view.View
+import android.widget.ViewSwitcher
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -15,4 +17,9 @@ object Util {
             currency = Currency.getInstance("TRY")
         }
     }
+}
+
+fun ViewSwitcher.switch(view: View) {
+    if (nextView == view)
+        showNext()
 }

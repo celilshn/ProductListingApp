@@ -10,45 +10,106 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <ViewSwitcher
+            android:id="@+id/switcherHorizontalList"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pagerProductListItem"
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerHorizontalList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/item_shimmer_product_list_horizontal" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutHorizontalList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pagerProductListItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:nestedScrollingEnabled="false">
+
+                </androidx.viewpager2.widget.ViewPager2>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tablayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="bottom|center"
+                    app:tabBackground="@drawable/tab_pager_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabRippleColor="@android:color/transparent"
+                    app:tabSelectedTextColor="@android:color/transparent"
+                    app:tabTextColor="@android:color/transparent" />
+            </RelativeLayout>
+
+        </ViewSwitcher>
+
+        <ViewSwitcher
+            android:id="@+id/switcherVerticalList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcyProductList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:nestedScrollingEnabled="false">
+                android:background="@color/gray_200"
+                android:nestedScrollingEnabled="true"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_product_list" />
 
-            </androidx.viewpager2.widget.ViewPager2>
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerVerticalList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:columnCount="2"
+                    android:orientation="horizontal">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="bottom|center"
-                app:tabBackground="@drawable/tab_pager_selector"
-                app:tabGravity="center"
-                app:tabRippleColor="@android:color/transparent"
-                app:tabIndicatorHeight="0dp"
-                app:tabSelectedTextColor="@android:color/transparent"
-                app:tabTextColor="@android:color/transparent" />
-        </RelativeLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1">
+                        <include layout="@layout/item_shimmer_product_list" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1">
+                        <include layout="@layout/item_shimmer_product_list" />
+                    </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcyProductList"
-            android:background="@color/gray_200"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:nestedScrollingEnabled="true"
-            android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_product_list" />
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1">
+                        <include layout="@layout/item_shimmer_product_list" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1">
+                        <include layout="@layout/item_shimmer_product_list" />
+                    </FrameLayout>
+                </GridLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        </ViewSwitcher>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.cengcelil.productlistingapp.ProductListResult
 import com.cengcelil.productlistingapp.common.Resource
+import com.cengcelil.productlistingapp.common.Status
 import com.cengcelil.productlistingapp.common.Util.startUrl
 import com.cengcelil.productlistingapp.data.remote.model.ProductItem
 import com.cengcelil.productlistingapp.data.remote.model.ProductListPagingSource
@@ -46,6 +47,8 @@ class ProductViewModel @Inject constructor(
     }
 
     private suspend fun getProductList() = CoroutineScope(IO).launch {
+        lastProductListState.postValue(Resource.loading(""))
+
         productRepository.getProducts(startUrl).body()?.let {
             it.productsResult.let {
                 lastProductListState.postValue(Resource.success(it))

@@ -76,12 +76,16 @@ class ProductDetailFragment : Fragment() {
             Glide.with(requireContext()).load(data.imageUrl).into(imageView)
             b.radioGroup.removeAllViewsInLayout()
 
-            data.storageOptions.map {
+
+            val radioButtons = data.storageOptions.map {
                 CustomRadioButton(requireContext()).apply {
                     text = it
                     id = View.generateViewId()
                 }
-            }.forEach {
+            }
+            radioButtons.forEach {
+                if (it == radioButtons.first())
+                    it.isChecked = true
                 radioGroup.addView(it)
             }
             radioGroup.children.forEach {
